@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Desvende o Código</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      padding: 20px;
+    }
+    h1 {
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+    }
+    #game {
+      border: 2px dashed #0f0;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    input, button {
+      background: black;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 8px;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    #feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>DESVENDE O CÓDIGO</h1>
+  <div id="game">
+    <p id="challengeText">Carregando desafio...</p>
+    <input type="text" id="userInput" placeholder="Digite sua resposta" />
+    <button onclick="verificar()">Enviar</button>
+    <p id="feedback"></p>
+  </div>
+
+  <script>
+    const desafios = [
+      {
+        pergunta: "Qual é o resultado de 5 + '5' em JavaScript?",
+        resposta: "55"
+      },
+      {
+        pergunta: "Qual comando imprime no console no Python?",
+        resposta: "print"
+      },
+      {
+        pergunta: "Qual é o operador lógico de negação em JavaScript?",
+        resposta: "!"
+      },
+      {
+        pergunta: "Em HTML, qual tag cria um link?",
+        resposta: "a"
+      },
+      {
+        pergunta: "Como se chama uma variável em Python?",
+        resposta: "variavel"
+      },
+      {
+        pergunta: "Qual função exibe alertas no navegador?",
+        resposta: "alert"
+      },
+    ];
+
+    let desafioAtual;
+
+    function carregarDesafio() {
+      const aleatorio = Math.floor(Math.random() * desafios.length);
+      desafioAtual = desafios[aleatorio];
+      document.getElementById("challengeText").textContent = desafioAtual.pergunta;
+      document.getElementById("userInput").value = "";
+      document.getElementById("feedback").textContent = "";
+    }
+
+    function verificar() {
+      const respostaUsuario = document.getElementById("userInput").value.trim().toLowerCase();
+      const respostaCerta = desafioAtual.resposta.toLowerCase();
+      const feedback = document.getElementById("feedback");
+
+      if (respostaUsuario === respostaCerta) {
+        feedback.textContent = "CORRETO! Próximo enigma...";
+        setTimeout(carregarDesafio, 1500);
+      } else {
+        feedback.textContent = "Errado... tente de novo!";
+      }
+    }
+
+    carregarDesafio();
+  </script>
+</body>
+</html>
